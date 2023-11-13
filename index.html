@@ -24,10 +24,22 @@
       .scroll-hidden::-webkit-scrollbar {
         display: none;
       }
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
     </style>
-    <title>Shopping</title>
+    <title>Document</title>
   </head>
-  <body oncontextmenu="return false;" >
+  <body oncontextmenu="return false;">
     <nav class="navbar bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="#">
@@ -110,15 +122,14 @@
         class="d-flex justify-content-center flex-wrap gap-3 mt-4"
         id="searchs"
       >
-      <div class="col-12 col-sm-6">
-        <input
-        type="search"
-        class="form-control "
-        id="searchInput"
-        placeholder="Search..."
-      />
-      </div>
-        
+        <div class="col-12 col-sm-6">
+          <input
+            type="search"
+            class="form-control"
+            id="searchInput"
+            placeholder="Search..."
+          />
+        </div>
       </section>
       <section
         class="row row-cols-1 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 justify-content-center g-4 my-5"
