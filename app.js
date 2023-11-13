@@ -21,7 +21,7 @@ const btnColors = [
 let myProducts = JSON.parse(localStorage.getItem("products")) || [];
 let products = [];
 const getProducts = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch("https://anthonyfs.pythonanywhere.com/api/products/");
   const data = await res.json();
   products = data;
   categories();
@@ -119,7 +119,7 @@ function handleAddToCart(product) {
 
 function handleProductDetails(e, product) {
   const id = e.target.closest(".col").id;
-  //   fetch(`https://fakestoreapi.com/products/${id}`)
+  //   fetch(`https://anthonyfs.pythonanywhere.com/api/products/${id}/`)
   //     .then((res) => res.json())
   //     .then((res) => {
   //       modalTitle.textContent = res.title;
