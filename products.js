@@ -11,7 +11,7 @@ export const productUI = (product) => {
             <img src="${image}" class="p-2" height="250px" alt="...">
             <div class="card-body">
               <h5 class="card-title">${textTruncate(title, 20)}</h5>
-              <p class="card-text">${textTruncate(description, 75)}</p>
+              <p class="card-text">${textTruncate(description, 85)}</p>
             </div>
             <div class="card-footer w-100 d-flex justify-content-center gap-3">
                 <button class="btn btn-danger">
