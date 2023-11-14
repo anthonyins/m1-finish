@@ -1,6 +1,6 @@
 import { sepetUI } from "./basket.js";
 import { productUI } from "./products.js";
-import { addStorage } from "./utils.js";
+import { addStorage, btnColors } from "./utils.js";
 const btnDivs = document.getElementById("btns");
 const productDivs = document.getElementById("products");
 const searchInput = document.getElementById("searchInput");
@@ -8,16 +8,8 @@ const modalBody = document.querySelector(".modal-body");
 const canvasBody = document.querySelector(".offcanvas-body");
 const modalTitle = document.querySelector(".modal-title");
 const badge = document.getElementById("sepet");
-const btnColors = [
-  "primary",
-  "secondary",
-  "success",
-  "info",
-  "warning",
-  "danger",
-  "light",
-  "dark",
-];
+const categoryTitle = document.getElementById("category");
+
 let myProducts = JSON.parse(localStorage.getItem("products")) || [];
 let products = [];
 const getProducts = async () => {
@@ -94,19 +86,15 @@ window.addEventListener("load", () => {
 btnDivs.addEventListener("click", (e) => {
   if (e.target.classList.contains("btn")) {
     const selectedCategory = e.target.innerText.toLowerCase();
-    const filtered =
-      selectedCategory !== "all"
-        ? products.filter(
-            (item) => item.category.toLowerCase() === selectedCategory
-          )
-        : products;
-    displayProducts(filtered);
+    categoryTitle.innerText = selectedCategory.toUpperCase();
+    const filtereds = filtered(selectedCategory, searchInput.value);
+    displayProducts(filtereds);
   }
 });
 
 function handleAddToCart(product) {
   if (!myProducts.some((item) => item.title == product.title)) {
-    myProducts.push({ ...product, quantity: 1 });
+    myProducts.push(product);
     badge.innerText = myProducts.length;
   } else {
     myProducts = myProducts.map((item) =>
@@ -119,7 +107,7 @@ function handleAddToCart(product) {
 
 function handleProductDetails(e, product) {
   const id = e.target.closest(".col").id;
-  //   fetch(`https://anthonyfs.pythonanywhere.com/api/products/${id}/`)
+  //   fetch(`https://anthonyfs.pythonanywhere.com/api/products/${id}`)
   //     .then((res) => res.json())
   //     .then((res) => {
   //       modalTitle.textContent = res.title;
@@ -131,12 +119,13 @@ function handleProductDetails(e, product) {
   //             </div>
   //             `;
   //     });
-  modalTitle.textContent = product.title;
+  const { title, image, description, price } = product;
+  modalTitle.textContent = title;
   modalBody.innerHTML = `<div class="text-center">
-            <img src="${product.image}" class="p-2" height="250px" alt="...">
-            <h5 class="card-title">${product.title}</h5>
-            <p class="card-text">${product.description}</p>
-            <p class="card-text">Fiyat: ${product.price} TL</p>
+            <img src="${image}" class="p-2" height="250px" alt="...">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">${description}</p>
+            <p class="card-text">Fiyat: ${price} TL</p>
             </div>
             `;
 }
@@ -161,8 +150,19 @@ function sepetEvents(e) {
 
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase();
-  const filteredProducts = products.filter((item) =>
-    item.title.toLowerCase().includes(value)
-  );
+  const selectedCategory = categoryTitle.innerText.toLowerCase();
+  const filteredProducts = filtered(selectedCategory, value);
   displayProducts(filteredProducts);
 });
+
+function filtered(selectedCategory, value) {
+  const filteredProducts =
+    selectedCategory !== "all"
+      ? products.filter(
+          (item) =>
+            item.title.toLowerCase().includes(value) &&
+            item.category.toLowerCase() === selectedCategory
+        )
+      : products.filter((item) => item.title.toLowerCase().includes(value));
+  return filteredProducts;
+}
