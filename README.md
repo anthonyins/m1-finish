@@ -10,6 +10,10 @@ Bu ödevin amacı, Module 1 süresince öğrendiğiniz bilgileri uygulayıp Modu
 İlgili DOM elementlerini JavaScript kullanarak yakalayın.
 2. API Entegrasyonu ve Ürünleri Gösterme
 - Ürünleri çekecek bir fonksiyon oluşturun ve sayfa yüklendiğinde bu fonksiyonu çalıştırın.
+
+https://github.com/anthonyins/m1-finish/assets/132161891/2214f23c-3175-4c2b-871d-8899a0e6b779
+
+
 - API adresinden gelen ürünleri dinamik bir şekilde ekrana yansıtın.
 - Destructuring yöntemini kullanarak ürün bilgilerine erişin ve ilgili elementlere yazdırın.
 3. Ürün Açıklama Bilgisini Kırpma
